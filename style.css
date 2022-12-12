@@ -95,6 +95,10 @@ body {
   flex-wrap: nowrap;
 }
 
+textarea {
+  resize: none;
+}
+
 #search {
   width: 200px;
   height: 35px;
