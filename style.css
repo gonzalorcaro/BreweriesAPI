@@ -1,0 +1,283 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: #fffbeb;
+  font-family: sans-serif;
+  padding: 90px 20px 0;
+  color: #b45309;
+
+}
+
+/* Header */
+
+.header {
+  background-color: #f7d54e;
+  height: 80px;
+  position: fixed;
+  width: 100%;
+  top: 0;
+  left: 0;
+}
+
+.nav {
+  display: flex;
+  justify-content: space-between;
+  max-width: 992px;
+  margin: 0 auto;
+}
+
+.nav-link {
+  color: #924205;
+  text-decoration: none;
+}
+
+#divLogo {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  align-content: center;
+  justify-content: center;
+  align-items: center;
+}
+
+#logoBeer {
+  width: 50px;
+  height: 50px;
+}
+
+.logo {
+  font-size: 30px;
+  font-weight: bold;
+  padding: 0 40px;
+  line-height: 80px;
+}
+
+.nav-menu {
+  display: flex;
+  margin-right: 40px;
+  list-style: none;
+}
+
+.nav-menu-item {
+  font-size: 18px;
+  margin: 0 10px;
+ 
+  text-transform: uppercase;
+  width: max-content;
+  display: flex;
+  align-content: center;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: nowrap;
+  flex-direction: row;
+  gap: 20px;
+}
+
+.nav-menu-link:hover {
+  background-color: #fffbeb;
+  transition: 0.5s;
+}
+
+.nav-menu-link {
+  padding: 8px 12px;
+  border-radius: 3px;
+}
+
+.container {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+}
+
+#search {
+  width: 200px;
+  height: 35px;
+  background: #fffbeb;
+  border: none;
+  font-size: 15px;
+  border-radius: 15px;
+  border: black solid;
+  padding-left: 25px;
+}
+
+#divSearch {
+  width: 30px;
+  height: 30px;
+  background: #fffbeb;
+  border: black solid;
+  border-radius: 5px;
+  display: flex;
+  align-content: center;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: nowrap;
+  flex-direction: row;
+
+}
+
+#searchButton {
+  width: 20px;
+  height: 20px;
+}
+
+/* menu lateral */
+.sidebar {
+  width: 300px;
+  height: 100%;
+  background: #f7d54e;
+  border-style: groove;
+  position: fixed;
+}
+
+/* Lista menu lateral */
+
+.nav_link {
+  color: #924205;
+  display: block;
+  padding: 15px 0;
+  text-decoration: none;
+}
+
+.list_inside {
+  list-style: none;
+  border-radius: 12px;
+  text-align: left;
+  padding: 5px 10px 0 20px;
+  color: #924205;
+}
+
+.list {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  padding-left: 20px;
+}
+
+.list_item {
+  list-style: none;
+  width: 100%;
+
+  overflow: hidden;
+}
+
+.list__button {
+  display: flex;
+  align-items: center;
+  gap: 1em;
+  width: 70%;
+  margin: 0 auto;
+}
+
+.content {
+  padding-left: 320px;
+}
+
+/* tiendas */
+#contenido {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-content: center;
+  justify-content: center;
+  align-items: center;
+  gap: 1.5rem;
+  margin: 5rem 4rem;
+  width: fit-content;
+}
+
+.shop {
+  width: 445px;
+  height: 350px;
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: center;
+  flex-direction: column;
+  align-content: center;
+  align-items: center;
+  border: 3px solid black;
+  border-radius: 10%;
+  background-color: #fde68a;
+}
+
+p {
+  margin: auto auto auto 0;
+}
+
+.parrafos {
+  width: fit-content;
+  margin: auto;
+  font-size: 100%;
+}
+
+.select {
+  width: 200px;
+  height: 30px;
+  background: #fffbeb;
+  border: none;
+  border-radius: 10px;
+  padding-left: 25px;
+}
+
+#comments {
+  display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+  padding-bottom: 200px;
+  gap: 20px;
+  padding-left:100px;
+}
+
+#commentsDiv {
+  display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-items: center;
+    justify-content: center;
+  gap: 40px;
+}
+
+#commentsDivSon {
+  display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+}
+
+#commentsSection {
+  width: 600px;
+  height: 80px;
+}
+
+.comment {
+  width: 400px;
+  height: 50px;
+}
+
+.buttonSend {
+  width: 70px;
+  height: 40px;
+}
+
+.buttonDelete {
+  width: 50px;
+  height: 30px;
+}
+
+.DivC {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  align-items: center;
+  justify-content: center;
+gap: 40px;
+}

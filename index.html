@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>🍻Breweries</title>
+    <link rel="stylesheet" href="./style.css" />
+    <script src="./script.js" defer></script>
+  </head>
+
+  <body>
+    <header class="header">
+      <nav class="nav">
+        <div id="divLogo">
+        <input type="image" src="./imagenes/logoBeer.png" id="logoBeer" onclick="getShopRandom()"/>
+        <a href="#" class="logo nav-link" onclick="getShopRandom()">Breweries</a>
+      </div>
+        <ul class="nav-menu">
+          <li class="nav-menu-item">
+
+            <input type="search" id="search" placeholder="Search by name..." />
+            <div id="divSearch">
+              <input type="image" src="./imagenes/search.png" id="searchButton" onclick="getShopSearch()"/>
+            </div>
+          </li>
+        </ul>
+        <ul class="nav-menu">
+          <li class="nav-menu-item">
+            <a href="#" class="nav-menu-link nav-link" onclick="getShopFavorites()"><b>Favorites</b></a>
+          </li>
+        </ul>
+      </nav>
+    </header>
+
+    <section class="container">
+
+      <div class="sidebar">
+
+        <ul class="list">
+          <li class="list_item">
+            <div class="list_button">
+              <a href="#" class="nav_link" id="start" onclick="getShopRandom()">Start</a>
+            </div>
+          </li>
+
+          <li class="list_item list_item_click">
+            <div class="list_button list_button_click">
+              <a href="#" class="nav_link">Beer Types</a>
+            </div>
+            <ul class="list_show" style="height: 0px;">
+              <li class="list_inside">
+                <input type="radio" name="type" class="nav_link_inside" id="null" value="" checked>   All types
+              </li>
+              <li class="list_inside">
+                <input type="radio" name="type" class="nav_link_inside" id="micro" value="micro">   Micro
+              </li>
+              <li class="list_inside">
+                <input type="radio" name="type" class="nav_link_inside" id="nano" value="nano">   Nano
+              </li>
+              <li class="list_inside">
+                <input type="radio" name="type" class="nav_link_inside" id="regional" value="regional">   Regional
+              </li>
+              <li class="list_inside">
+                <input type="radio" name="type" class="nav_link_inside" id="brewpub" value="brewpub">   Brewpub
+              </li>
+              <li class="list_inside">
+                <input type="radio" name="type" class="nav_link_inside" id="large" value="large">   Large
+              </li>
+              <li class="list_inside">
+                <input type="radio" name="type" class="nav_link_inside" id="planning" value="planning">   Planning
+              </li>
+              <li class="list_inside">
+                <input type="radio" name="type" class="nav_link_inside" id="bar" value="bar">   Bar
+              </li>
+              <li class="list_inside">
+                <input type="radio" name="type" class="nav_link_inside" id="contract" value="contract">   Contract
+              </li>
+              <li class="list_inside">
+                <input type="radio" name="type" class="nav_link_inside" id="closed" value="closed">   Closed
+              </li>
+            </ul>
+          </li>
+
+          <li class="list_item">
+            <div class="list_button list_button_click">
+              <a href="#" class="nav_link" id="country">Country</a>
+            </div>
+            <div class="list_show" style="height: 0px;">
+              <select id="selectCountry" class="select" onchange="getListShops()">
+              </select>
+            </div>
+          </li>
+
+          <li class="list_item">
+            <div class="list_button list_button_click">
+              <a href="#" class="nav_link" id="state">State</a>
+            </div>
+            <div class="list_show" style="height: 0px;">
+              <select id="selectState" class="select" onchange="getListShops()">
+
+              </select>
+            </div>
+          </li>
+        </ul>
+      </div>
+      <div class="content">
+        <div id="contenido"></div>
+        <div id="comments"></div>
+      </div>
+    </section>
+  </body>
+</html>
