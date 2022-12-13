@@ -57,7 +57,7 @@ async function fillSelects() {
       contenido.innerHTML = "";
     
       dataShop.forEach((shop) => {
-        drawShop(shop);
+        drawShop(shop, "normalShop");
       });
     }
   }
@@ -71,7 +71,7 @@ function getShopFavorites() {
   contenido.innerHTML = "";
 
   for (o in shops) {
-    drawShopFavorite(shops[o]);
+    drawShop(shops[o], "favoriteShop");
   };
 }
 
@@ -96,7 +96,7 @@ async function getShopRandom() {
   contenido.innerHTML = "";
 
   dataShop.forEach((shop) => {
-    drawShop(shop);
+    drawShop(shop, "normalShop");
   });
 }
 
@@ -117,13 +117,13 @@ async function getShopFilters(type, country, state) {
   contenido.innerHTML = "";
  
   dataShop.forEach((shop) => {
-    drawShop(shop);
+    drawShop(shop, "normalShop");
   });
 }
 
 
 // pinta una tienda. Recibe un objeto json?
-function drawShop(ObjectShop) {
+function drawShop(ObjectShop, type) {
   let shopDiv = document.createElement("div");
   shopDiv.classList.add("shop");
   contenido.appendChild(shopDiv);
@@ -136,7 +136,7 @@ function drawShop(ObjectShop) {
   parrafos.appendChild(titulo);
 
   for (o in ObjectShop) {
-    if (ObjectShop[o] != null && o != "name" && o != "id") {
+    if (ObjectShop[o] != null && o != "name" && o != "id" && o != "longitude" && o != "latitude" && o != "updated_at" && o != "created_at") {
       let parrafo = document.createElement("p");
       parrafo.innerHTML = "<b>" + o + "</b>:  " + ObjectShop[o];
       parrafos.appendChild(parrafo);
@@ -147,15 +147,31 @@ function drawShop(ObjectShop) {
   br.innerHTML = "<br>";
   parrafos.appendChild(br);
 
-  let favorite = document.createElement("button");
-  favorite.id = ObjectShop.id;
-  favorite.classList.add("favoriteShops");
-  favorite.innerHTML="Add to Favorites";
-  favorite.addEventListener("click", e => {favoriteStore(ObjectShop.id, "add")});
-  parrafos.appendChild(favorite);
-
-  shopDiv.appendChild(parrafos);
-}
+  switch(type) {
+    case "normalShop":
+      let favorite = document.createElement("button");
+      favorite.id = ObjectShop.id;
+      favorite.classList.add("favoriteShops");
+      favorite.innerHTML="Add to Favorites";
+      favorite.addEventListener("click", e => {favoriteStore(ObjectShop.id, "add")});
+      parrafos.appendChild(favorite);
+    
+      shopDiv.appendChild(parrafos);
+      break;
+    case "favoriteShop":
+      let removeFavorite = document.createElement("button");
+      removeFavorite.id = ObjectShop.id;
+      removeFavorite.classList.add("removeFavorite");
+      removeFavorite.innerHTML="Remove to Favorites";
+      removeFavorite.addEventListener("click", e => {favoriteStore(ObjectShop.id, "remove")});
+      parrafos.appendChild(removeFavorite);
+    
+      shopDiv.appendChild(parrafos);
+      break;
+    default:
+      console.log("default case switch");
+  }
+};
 
 // pinta tienda favorita
 function drawShopFavorite(ObjectShop) {
