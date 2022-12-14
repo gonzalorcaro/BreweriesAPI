@@ -173,42 +173,6 @@ function drawShop(ObjectShop, type) {
   }
 };
 
-// pinta tienda favorita
-function drawShopFavorite(ObjectShop) {
-  let shopDiv = document.createElement("div");
-  shopDiv.classList.add("shop");
-  contenido.appendChild(shopDiv);
-
-  let parrafos = document.createElement("div");
-  parrafos.classList.add("parrafos");
-
-  let titulo = document.createElement("h3");
-  titulo.innerHTML = "<b>" + ObjectShop.name + "</b><br><br>";
-  parrafos.appendChild(titulo);
-
-  for (o in ObjectShop) {
-    if (ObjectShop[o] != null && o != "name" && o != "id") {
-      let parrafo = document.createElement("p");
-      parrafo.innerHTML = "<b>" + o + "</b>:  " + ObjectShop[o];
-      parrafos.appendChild(parrafo);
-    }
-  }
-
-  let br = document.createElement("p");
-  br.innerHTML = "<br>";
-  parrafos.appendChild(br);
-
-  let removeFavorite = document.createElement("button");
-  removeFavorite.id = ObjectShop.id;
-  removeFavorite.classList.add("removeFavorite");
-  removeFavorite.innerHTML="Remove to Favorites";
-  removeFavorite.addEventListener("click", e => {favoriteStore(ObjectShop.id, "remove")});
-  parrafos.appendChild(removeFavorite);
-
-  shopDiv.appendChild(parrafos);
-}
-
-
 // Menu lateral evento desplegar
 let listElements = document.querySelectorAll(".list_button_click");
 
