@@ -56,38 +56,15 @@ async function fillSelects() {
       let dataShop = await response.json();
       contenido.innerHTML = "";
     
-      dataShop.forEach((shop) => {
-        drawShop(shop, "normalShop");
-      });
+      if (dataShop.length != 0) {
+        dataShop.forEach((shop) => {
+          drawShop(shop, "normalShop");
+        });
+      } else {
+        noResultsFilters();
+      }
     }
   }
-
-// mostrar todas las tiendas favoritas
-function getShopFavorites() {
-  let shops = []; 
-  const favoriteJSON = localStorage.getItem('favorite');
-
-  if (favoriteJSON != null) shops = JSON.parse(favoriteJSON);
-  contenido.innerHTML = "";
-
-  for (o in shops) {
-    drawShop(shops[o], "favoriteShop");
-  };
-}
-
-
-// tienda favorita
-async function favoriteStore(id, action) {
-  let response = await fetch(`${BreweryById}${id}`);
-  let dataShop = await response.json();
-
-  if (action == "add"){
-    save_localStorage(dataShop);
-  } else if (action == "remove") {
-    remove_localStorage(dataShop);
-  }
-
-}
 
 // 20 tiendas aleatorias
 async function getShopRandom() {
@@ -95,9 +72,13 @@ async function getShopRandom() {
   let dataShop = await response.json();
   contenido.innerHTML = "";
 
-  dataShop.forEach((shop) => {
-    drawShop(shop, "normalShop");
-  });
+  if (dataShop.length != 0) {
+    dataShop.forEach((shop) => {
+      drawShop(shop, "normalShop");
+    });
+  } else {
+    noResultsFilters();
+  }
 }
 
 
@@ -116,9 +97,13 @@ async function getShopFilters(type, country, state) {
   let dataShop = await response.json();
   contenido.innerHTML = "";
  
-  dataShop.forEach((shop) => {
-    drawShop(shop, "normalShop");
-  });
+  if (dataShop.length != 0) {
+    dataShop.forEach((shop) => {
+      drawShop(shop, "normalShop");
+    });
+  } else {
+    noResultsFilters();
+  }
 }
 
 
@@ -168,8 +153,6 @@ function drawShop(ObjectShop, type) {
     
       shopDiv.appendChild(parrafos);
       break;
-    default:
-      console.log("default case switch");
   }
 };
 
@@ -197,14 +180,61 @@ listElementsLinks.forEach(el => {
   });
 });
 
-
-// Obtener opciones seleccionadas
+// Obtener filtros seleccionadas
 function getListShops() {
   let typeRadio = document.querySelector('input[name="type"]:checked').value;
   let selectCountry = document.getElementById("selectCountry").value;
   let selectState = document.getElementById("selectState").value;
 
   getShopFilters(typeRadio, selectCountry, selectState);
+}
+
+// mensaje cuando no hay resultados con los filtros
+function noResultsFilters() {
+  const h1 = document.createElement("h1");
+  h1.innerText = "No breweries found with the selected filters, please try again";
+
+  contenido.appendChild(h1);
+
+}
+
+// mensaje cuando no hay favoritos
+function noFavoritesFound() {
+  const h1 = document.createElement("h1");
+  h1.innerText = "No favorites breweries found";
+
+  contenido.appendChild(h1);
+
+}
+
+// mostrar todas las tiendas favoritas
+function getShopFavorites() {
+  let shops = []; 
+  const favoriteJSON = localStorage.getItem('favorite');
+
+  if (favoriteJSON != null) shops = JSON.parse(favoriteJSON);
+  contenido.innerHTML = "";
+
+  if (shops.length != 0) {
+    for (o in shops) {
+      drawShop(shops[o], "favoriteShop");
+    };
+  } else {
+    noFavoritesFound();
+  }
+}
+
+// tienda favorita
+async function favoriteStore(id, action) {
+  let response = await fetch(`${BreweryById}${id}`);
+  let dataShop = await response.json();
+
+  if (action == "add"){
+    save_localStorage(dataShop);
+  } else if (action == "remove") {
+    remove_localStorage(dataShop);
+  }
+
 }
 
 //añadir tienda localstorage favoritos
@@ -241,7 +271,7 @@ commentsDiv.setAttribute("id", "commentsDiv");
 
 const commentsSection = document.createElement("textarea");
 commentsSection.setAttribute("id", "commentsSection");
-commentsSection.innerText = "Write something here";
+commentsSection.setAttribute("placeholder", "Write something here");
 
 const sendButton = document.createElement("button");
 sendButton.setAttribute("class", "buttonSend");
@@ -258,20 +288,20 @@ commentsDivSon.setAttribute("id", "commentsDivSon");
 comments.appendChild(commentsDivSon);
 
 // añadir comentario
-function addComment(text, position) {
+function addComment(id, text) {
 
   const DivC = document.createElement("div");
   DivC.setAttribute("class", "DivC");
 
   const comment = document.createElement("textarea");
   comment.setAttribute("class", "comment");
-  comment.setAttribute("id", position);
+  comment.setAttribute("id", id);
   comment.innerText = text;
 
   const deleteComment = document.createElement("button");
   deleteComment.setAttribute("class", "buttonDelete");
   deleteComment.innerText = "Delete";
-  deleteComment.addEventListener("click", e => {delComment(comment.id)});
+  deleteComment.addEventListener("click", e => {delComment(id)});
 
   DivC.appendChild(comment);
   DivC.appendChild(deleteComment);
@@ -284,24 +314,35 @@ function addCommentLocalStorage(textComment) {
   let comments = []; 
   const commentsJSON = localStorage.getItem('comments');
   if (commentsJSON != null) comments = JSON.parse(commentsJSON);
-  
-  comments.push(textComment);
+
+  let milisegundos = Date.now();
+
+  let comentario = {
+    id: milisegundos,
+    text: textComment
+  }
+
+  comments.push(comentario);
 
   const commentsToJSON = JSON.stringify(comments);
   localStorage.setItem('comments', commentsToJSON);
 
   let position = comments.length - 1;
-  addComment(textComment, position);
+  addComment(comentario.id, comentario.text);
+  console.log(comments);
 }
 
 // eliminar el comentario
 function delComment(id) {
+
+  console.log(id);
   let comments = []; 
   const commentsJSON = localStorage.getItem('comments');
   comments = JSON.parse(commentsJSON);
 
-  delete(comments[id]);
-
+ console.log(comments);
+ comments = comments.filter( comentario => comentario.id != id);
+  console.log(comments);
   const commentsToJSON = JSON.stringify(comments);
   localStorage.setItem('comments', commentsToJSON);
 
@@ -315,9 +356,10 @@ function fillComments() {
   const commentsJSON = localStorage.getItem('comments');
   if (commentsJSON != null) {
     comments = JSON.parse(commentsJSON);
-    for (let x = 0; x <= comments.length-1; x++) {
-    if(comments[x] != null) addComment(comments[x], x);   
-    };
+
+    comments.forEach((comentario) => {
+      addComment(comentario.id, comentario.text);
+    });
   }
 }
 
