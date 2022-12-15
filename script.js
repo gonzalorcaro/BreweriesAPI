@@ -295,6 +295,7 @@ function addComment(id, text) {
 
   const comment = document.createElement("textarea");
   comment.setAttribute("class", "comment");
+  comment.setAttribute("readonly", "readonly");
   comment.setAttribute("id", id);
   comment.innerText = text;
 
